@@ -1,0 +1,135 @@
+/* 🌿 SAANVI HEALTHCARE CENTRE - Custom Styling */
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+  color: #333;
+}
+
+/* Header Styling */
+header {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Navbar Hover */
+nav a {
+  transition: color 0.2s ease;
+}
+nav a:hover {
+  color: #15803d;
+}
+
+/* Hero Animation */
+.hero-title {
+  animation: fadeInDown 1s ease forwards;
+}
+.hero-subtitle {
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+/* Button Style */
+.btn-primary {
+  background: linear-gradient(to right, #16a34a, #22c55e);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(22, 163, 74, 0.3);
+}
+
+/* Blog Cards Hover */
+.blog-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Floating WhatsApp Button */
+#whatsappBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.3s ease-in-out;
+}
+#whatsappBtn:hover {
+  transform: scale(1.1);
+  background-color: #20b957;
+}
+
+/* Fade Animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll Reveal Elements */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Navbar (mobile view) */
+.menu-btn {
+  display: none;
+}
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+    font-size: 24px;
+    cursor: pointer;
+    color: #15803d;
+  }
+  nav {
+    display: none;
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  nav.active {
+    display: flex;
+  }
+  nav a {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+}

@@ -1,0 +1,10 @@
+/* Pattern generated using Hero Patterns */
+.bg-pattern {
+  background-color: rgba(255, 255, 255, 0.05);
+  background-image: radial-gradient(circle at center center, transparent,rgb(255,255,255)),
+    repeating-linear-gradient(135deg, rgb(255,255,255) 0px, rgb(255,255,255) 1px,transparent 1px, transparent 4px);
+  background-position: 50% 50%;
+  background-size: cover, 3px 3px;
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed;
+}
