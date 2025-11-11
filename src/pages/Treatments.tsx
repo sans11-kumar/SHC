@@ -45,11 +45,6 @@ const treatments = [
     category: 'Wellness & Prevention',
     conditions: [
       {
-        name: 'Detoxification',
-        description: 'Systematic cleansing and rejuvenation programs.',
-        treatments: ['Panchakarma therapy', 'Dietary cleanse', 'Herbal supplements', 'Lifestyle guidance'],
-      },
-      {
         name: 'Stress Management',
         description: 'Integrated approach to managing stress and anxiety.',
         treatments: ['Counseling', 'Meditation', 'Yoga therapy', 'Herbal support'],

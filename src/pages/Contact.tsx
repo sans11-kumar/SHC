@@ -1,7 +1,7 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const contactInfo = {
-  address: "123 Main Street, City Name - 123456",
+  address: "No.6 Saraswati Sadan CHS, Sec: 23, Plot- 211, Juinagar, Navi Mumbai",
   phone: "+91 98765 43210",
   email: "contact@saanvihealthcare.com",
   timings: "Monday–Saturday: 9 AM – 8 PM",

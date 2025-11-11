@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 
 const fadeIn = {
@@ -9,70 +9,32 @@ const fadeIn = {
 };
 
 const services = {
-  generalMedicine: [
-    {
-      title: 'Comprehensive Health Check-ups',
-      description: 'Full-body and routine diagnostic check-ups for all age groups.',
-      icon: 'stethoscope',
-    },
-    {
-      title: 'Chronic Disease Management',
-      description: 'Management of diabetes, hypertension, thyroid disorders, and cardiac health.',
-      icon: 'heartbeat',
-    },
-    {
-      title: 'Acute Illness Care',
-      description: 'Treatment for fever, infections, flu, allergies, and seasonal health issues.',
-      icon: 'user-md',
-    },
-    {
-      title: 'Respiratory Health',
-      description: 'Asthma, bronchitis, and allergy management through evidence-based treatment.',
-      icon: 'lungs',
-    },
-    {
-      title: 'Pediatric & Geriatric Care',
-      description: 'Holistic approach for children and elderly — gentle, effective, and safe.',
-      icon: 'child',
-    },
-    {
-      title: 'Vaccination & Preventive Care',
-      description: 'Immunizations and preventive check-ups for long-term wellness.',
-      icon: 'syringe',
-    },
+  drDhirendra: [
+    { icon: '🍬', title: 'Diabetes Management', description: 'Medical therapy, sugar monitoring, lifestyle & diet optimization.' },
+    { icon: '❤️', title: 'Hypertension (High Blood Pressure)', description: 'BP management, medication adjustment, cardiac protection.' },
+    { icon: '💧', title: 'Renal (Kidney) Impairment', description: 'Chronic kidney disease management, diet & drug monitoring.' },
+    { icon: '💗', title: 'Cardiac Health', description: 'Cholesterol control, ECG evaluation, preventive cardiology.' },
+    { icon: '🧠', title: 'Neurological Conditions', description: 'Migraine, stroke follow-up, neuropathy & nerve care.' },
+    { icon: '🫁', title: 'Respiratory Disorders (Asthma, COPD)', description: 'Inhalation therapy, medication regulation, pulmonary rehab.' },
+    { icon: '🔥', title: 'Digestive Disorders (GERD, IBS, Ulcers)', description: 'Evidence-based medicine with dietary modification.' },
+    { icon: '🦴', title: 'Joint & Bone Disorders (Arthritis, Osteoporosis)', description: 'Pain management, physiotherapy integration.' },
+    { icon: '🩺', title: 'General Health Check-ups', description: 'Preventive health screenings, vaccinations, medical reviews.' },
+    { icon: '💉', title: 'Post-COVID Recovery & Fatigue', description: 'Immunity restoration, lung function support, energy tonics.' },
+    { icon: '💊', title: 'Chronic Disease Management', description: 'Long-term care with integrated follow-up and medical supervision.' }
   ],
-  ayurveda: [
-    {
-      title: 'Panchakarma Detox Therapies',
-      description: 'Purify and rejuvenate your body with classic Ayurvedic cleansing therapies.',
-      icon: 'leaf',
-    },
-    {
-      title: 'Stress & Sleep Management',
-      description: 'Relaxation therapies like Shirodhara and Abhyanga for calmness and better sleep.',
-      icon: 'spa',
-    },
-    {
-      title: "Women's Health & PCOD Care",
-      description: "Ayurvedic hormonal balance therapies and nutrition guidance for women's wellness.",
-      icon: 'female',
-    },
-    {
-      title: 'Joint & Spine Treatments',
-      description: 'Effective management for arthritis, back pain, and spondylitis using traditional oils.',
-      icon: 'bone',
-    },
-    {
-      title: 'Skin & Hair Therapies',
-      description: 'Natural treatments for acne, pigmentation, and hair fall using herbal solutions.',
-      icon: 'burn',
-    },
-    {
-      title: 'Rejuvenation & Wellness',
-      description: 'Customized therapies for vitality, immunity, and emotional balance.',
-      icon: 'heart',
-    },
-  ],
+  drSunitha: [
+    { icon: '🌿', title: 'Panchakarma Detox Therapy', description: 'Complete body cleansing and rejuvenation treatments.' },
+    { icon: '💆', title: 'Stress, Anxiety & Insomnia (Manasika Rogas)', description: 'Shirodhara, Nasya, Abhyanga, herbal support.' },
+    { icon: '🍎', title: 'Obesity & Weight Management', description: 'Herbal fat-burners, metabolic correction, yoga, and diet.' },
+    { icon: '💗', title: 'Cardiac Health (Hridroga)', description: 'Heart-strengthening herbs and Rasayana therapy.' },
+    { icon: '🤰', title: 'Women’s Health (PCOD, Menstrual Disorders)', description: 'Hormonal balancing, fertility care, and prenatal therapies.' },
+    { icon: '👶', title: 'Pediatric Care (Bal Chikitsa)', description: 'Immunity boosting and growth support with herbal tonics.' },
+    { icon: '🦴', title: 'Joint & Bone Disorders (Sandhivata, Osteoarthritis)', description: 'Ayurvedic massage, medicated oils, and herbal formulations.' },
+    { icon: '🔥', title: 'Digestive Disorders (Ajeerna, Acidity, IBS)', description: 'Herbal detox, gut balancing, and dietary correction.' },
+    { icon: '💧', title: 'Renal & Urinary Disorders (Mutravaha Srotas)', description: 'Herbal diuretics, detoxification, and kidney care.' },
+    { icon: '🌸', title: 'Skin & Hair Care (Psoriasis, Dandruff, Hair Fall)', description: 'Herbal packs, medicated oils, and internal cleansing.' },
+    { icon: '🌞', title: 'Rejuvenation & Rasayana Therapy', description: 'Vitality, anti-aging, and immunity-building treatments.' }
+  ]
 };
 
 const Services = () => {
@@ -86,7 +48,6 @@ const Services = () => {
         />
       </Helmet>
 
-      {/* Hero Section */}
       <motion.section 
         className="pt-28 pb-16 bg-green-50 text-center"
         initial={{ opacity: 0 }}
@@ -96,12 +57,11 @@ const Services = () => {
         <div className="max-w-4xl mx-auto px-6">
           <h1 className="text-4xl font-bold text-green-800 mb-4">Our Medical & Ayurvedic Services</h1>
           <p className="text-gray-700 text-lg">
-            Integrating modern diagnostics and Ayurveda's timeless wisdom to deliver holistic healing at <b>Saanvi Healthcare Centre</b>.
+            Integrating modern diagnostics and Ayurveda's timeless wisdom to deliver holistic healing at our centre.
           </p>
         </div>
       </motion.section>
 
-      {/* General Medicine Section */}
       <motion.section 
         className="py-16 bg-white"
         initial="initial"
@@ -110,33 +70,24 @@ const Services = () => {
         variants={{ animate: { transition: { staggerChildren: 0.1 } } }}
       >
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-green-800 text-center mb-10">General Medicine Services</h2>
+          <h2 className="text-3xl font-bold text-green-800 text-center mb-4">🩺 Dr. Dhirendra (MBBS, MD)</h2>
+          <p className="text-center text-gray-600 mb-10">Specialist in Internal Medicine & Chronic Disease Management</p>
           <div className="grid md:grid-cols-3 gap-10">
-            {services.generalMedicine.map((service, index) => (
+            {services.drDhirendra.map((service, index) => (
               <motion.div
                 key={index}
                 variants={fadeIn}
                 className="bg-gray-50 p-8 rounded-2xl shadow-md text-center hover:shadow-lg transition-shadow duration-300"
               >
-                <i className={`fas fa-${service.icon} text-green-700 text-4xl mb-4`}></i>
+                <span className="text-4xl mb-4 inline-block">{service.icon}</span>
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-gray-600">{service.description}</p>
               </motion.div>
             ))}
           </div>
-
-          <div className="text-center mt-10">
-            <Link 
-              to="/appointment" 
-              className="inline-block px-8 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors duration-300"
-            >
-              Book Appointment
-            </Link>
-          </div>
         </div>
       </motion.section>
 
-      {/* Ayurveda Section */}
       <motion.section 
         className="py-16 bg-green-50"
         initial="initial"
@@ -145,28 +96,20 @@ const Services = () => {
         variants={{ animate: { transition: { staggerChildren: 0.1 } } }}
       >
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-green-800 text-center mb-10">Ayurveda & Panchakarma Services</h2>
+          <h2 className="text-3xl font-bold text-green-800 text-center mb-4">🌿 Dr. Sunitha (MD Ayurveda)</h2>
+          <p className="text-center text-gray-600 mb-10">Specialist in Ayurvedic Medicine, Panchakarma & Holistic Healing</p>
           <div className="grid md:grid-cols-3 gap-10">
-            {services.ayurveda.map((service, index) => (
+            {services.drSunitha.map((service, index) => (
               <motion.div
                 key={index}
                 variants={fadeIn}
                 className="bg-white p-8 rounded-2xl shadow-md text-center hover:shadow-lg transition-shadow duration-300"
               >
-                <i className={`fas fa-${service.icon} text-green-700 text-4xl mb-4`}></i>
+                <span className="text-4xl mb-4 inline-block">{service.icon}</span>
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-gray-600">{service.description}</p>
               </motion.div>
             ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <Link 
-              to="/appointment" 
-              className="inline-block px-8 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors duration-300"
-            >
-              Schedule Your Therapy
-            </Link>
           </div>
         </div>
       </motion.section>

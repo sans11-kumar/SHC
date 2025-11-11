@@ -18,13 +18,16 @@ const Home: React.FC = () => {
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6 md:flex items-center">
           <div className="md:w-1/2">
-            <img src="assets/clinic-interior.jpg" alt="Saanvi Healthcare Centre" className="rounded-2xl shadow-lg w-full object-cover h-96" />
+            <img src="/assets/images/clinic-hero.jpg" alt="Saanvi Healthcare Centre Logo" className="rounded-2xl shadow-lg w-full object-cover h-96" />
           </div>
           <div className="md:w-1/2 md:pl-10 mt-8 md:mt-0">
-            <h3 className="text-3xl font-bold text-green-800 mb-4">Welcome to Saanvi Healthcare Centre</h3>
+            <div className="flex items-center mb-4">
+              <img src="/logo.svg" alt="Saanvi Healthcare Centre Logo" className="h-12 mr-4" />
+              <h3 className="text-3xl font-bold text-green-800">Welcome to Saanvi Healthcare Centre</h3>
+            </div>
             <p className="text-gray-700 mb-4">
               Led by <b>Dr. Dhirendra Yadav (MD, Internal Medicine)</b> and <b>Dr. Sunitha Yadav (MD, Ayurveda Medicine)</b>,  
-              Saanvi Healthcare Centre brings together the strengths of <b>modern diagnostics</b> and <b>Ayurvedic wisdom</b> to offer holistic, patient-focused care.
+              our centre brings together the strengths of <b>modern diagnostics</b> and <b>Ayurvedic wisdom</b> to offer holistic, patient-focused care.
             </p>
             <p className="text-gray-700 mb-6">
               Our mission is to heal both body and mind — through compassion, experience, and a blend of science and tradition.
@@ -51,11 +54,6 @@ const Home: React.FC = () => {
               description="Authentic Ayurvedic treatments for holistic wellness and disease prevention."
             />
             <ServiceCard
-              icon="fa-spa"
-              title="Panchakarma & Detox"
-              description="Rejuvenate your body and mind with traditional cleansing and detox therapies."
-            />
-            <ServiceCard
               icon="fa-heartbeat"
               title="Cardio & Lifestyle Care"
               description="Specialized management for heart, blood pressure, and metabolic conditions."
@@ -69,6 +67,16 @@ const Home: React.FC = () => {
               icon="fa-hand-sparkles"
               title="Skin & Hair Care"
               description="Natural therapies for radiant skin, healthy hair, and inner vitality."
+            />
+            <ServiceCard
+              icon="fa-utensils"
+              title="Diet and Nutrition"
+              description="Personalized diet plans for a healthier lifestyle."
+            />
+            <ServiceCard
+              icon="fa-weight"
+              title="Weight Management"
+              description="Effective strategies for sustainable weight loss and maintenance."
             />
           </div>
         </div>

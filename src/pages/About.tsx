@@ -1,22 +1,25 @@
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
+import DoctorCard from '../components/DoctorCard';
 
 const doctors = [
   {
-    name: 'Dr. John Smith',
+    name: 'Dr. ',
     title: 'MBBS, MD (General Medicine)',
     specialty: 'General Medicine',
     experience: '15+ years',
-    image: '/doctors/doctor1.jpg',
-    description: 'Dr. Smith is a highly experienced general physician with expertise in managing chronic diseases and preventive healthcare.',
+    image: '/images/doctors/doctor1.jpg',
+    description: 'Dr.  is a highly experienced general physician with expertise in managing chronic diseases and preventive healthcare.',
+    timings: '7:00 pm to 9:30 pm',
   },
   {
-    name: 'Dr. Ayush Sharma',
-    title: 'BAMS (Ayurveda Physician)',
+    name: 'Dr. ',
+    title: 'BAMS, MD (Ayurveda Physician)',
     specialty: 'Ayurveda',
     experience: '12+ years',
-    image: '/doctors/doctor2.jpg',
-    description: 'Dr. Sharma specializes in traditional Ayurvedic treatments and has helped numerous patients achieve holistic wellness.',
+    image: '/images/doctors/doctor2.jpg',
+    description: 'Dr. specializes in traditional Ayurvedic treatments and has helped numerous patients achieve holistic wellness.',
+    timings: '10:00 am to 1:30 pm',
   },
 ];
 
@@ -31,9 +34,12 @@ const About = () => {
       <section className="pt-24 pb-16 bg-green-50">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl font-bold text-green-800 mb-6">About Saanvi Healthcare Centre</h1>
+            <div className="flex items-center justify-center mb-6">
+              <img src="/assets/images/logo.svg" alt="Saanvi Healthcare Centre Logo" className="h-16 mr-4" />
+              <h1 className="text-4xl font-bold text-green-800">About Saanvi Healthcare Centre</h1>
+            </div>
             <p className="text-lg text-gray-700 leading-relaxed">
-              At <b>Saanvi Healthcare Centre</b>, we believe true health is a harmony of body, mind, and nature. 
+              At our centre, we believe true health is a harmony of body, mind, and nature. 
               Our clinic brings together the precision of modern medical science with the ancient wisdom of Ayurveda 
               to provide complete, compassionate care for every individual.
             </p>
@@ -104,7 +110,7 @@ const About = () => {
               </ul>
             </div>
             <div className="relative h-96">
-              <div className="absolute inset-0 bg-[url('/about-mission.jpg')] bg-cover bg-center rounded-lg shadow-lg" />
+              <div className="absolute inset-0 bg-[url('/images/about-mission.jpg')] bg-cover bg-center rounded-lg shadow-lg" />
             </div>
           </div>
         </div>
@@ -116,30 +122,14 @@ const About = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Our Doctors</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {doctors.map((doctor, index) => (
-              <div
+              <DoctorCard
                 key={index}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
-              >
-                <div className="aspect-w-16 aspect-h-9 relative">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${doctor.image})` }}
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{doctor.name}</h3>
-                  <p className="text-primary-600 mb-2">{doctor.title}</p>
-                  <p className="text-gray-600 mb-4">{doctor.description}</p>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="mr-4">
-                      <strong>Specialty:</strong> {doctor.specialty}
-                    </span>
-                    <span>
-                      <strong>Experience:</strong> {doctor.experience}
-                    </span>
-                  </div>
-                </div>
-              </div>
+                name={doctor.name}
+                specialization={doctor.specialty}
+                image={doctor.image}
+                qualifications={[doctor.title, doctor.experience]}
+                availability={doctor.timings}
+              />
             ))}
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 interface BlogPost {
   id: number;
@@ -13,37 +13,31 @@ const blogPosts: BlogPost[] = [
     id: 1,
     title: 'Boost Your Immunity the Ayurvedic Way',
     excerpt: 'Discover simple Ayurvedic herbs and daily habits that can help you strengthen your immunity naturally and maintain vitality.',
-    image: '/assets/blog1.jpg'
+    image: '/assets/images/blog/blog1.jpg'
   },
   {
     id: 2,
     title: 'Managing Diabetes Holistically',
     excerpt: 'Understand how integrating modern medicine with Ayurvedic diet principles can help manage diabetes more effectively.',
-    image: '/assets/blog2.jpg'
+    image: '/assets/images/blog/blog2.jpg'
   },
   {
     id: 3,
     title: 'Stress Relief Through Ayurveda',
     excerpt: 'Learn how herbal therapies, breathing techniques, and lifestyle changes from Ayurveda can balance your mind and emotions.',
-    image: '/assets/blog3.jpg'
+    image: '/images/blog/stress.jpg'
   },
   {
     id: 4,
     title: 'Monsoon Health Tips',
     excerpt: "Stay safe this monsoon with expert preventive measures from both modern medicine and Ayurveda's seasonal regimen (Ritu Charya).",
-    image: '/assets/blog4.jpg'
-  },
-  {
-    id: 5,
-    title: 'Natural Relief for Joint Pain',
-    excerpt: "Explore how Ayurveda's Panchakarma and specific herbal oils can help relieve joint pain and improve mobility.",
-    image: '/assets/blog5.jpg'
+    image: '/images/blog/remedies.jpg'
   },
   {
     id: 6,
     title: 'Daily Diet According to Ayurveda',
     excerpt: 'Balance your Doshas through mindful eating — discover how meal timing and food combinations affect overall health.',
-    image: '/assets/blog6.jpg'
+    image: '/images/blog/diet.jpg'
   }
 ];
 
@@ -73,7 +67,7 @@ const Blog = () => {
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-green-800 mb-8">Health & Wellness Blog</h2>
           <p className="text-gray-700 mb-10 max-w-2xl mx-auto">
-            Stay informed with the latest health insights, Ayurveda lifestyle tips, and medical advice curated by our doctors at <b>Saanvi Healthcare Centre</b>.
+            Stay informed with the latest health insights, Ayurveda lifestyle tips, and medical advice curated by our doctors.
           </p>
 
           {/* Search Bar */}

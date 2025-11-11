@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 // Form validation schema
 const appointmentSchema = z.object({
@@ -40,7 +40,7 @@ const Appointment = () => {
 
   const onSubmit = async (data: AppointmentFormData) => {
     // Format the message for WhatsApp
-    const text = `Hello! I would like to book an appointment at Saanvi Healthcare Centre.
+    const text = `Hello! I would like to book an appointment at your healthcare centre.
 Full Name: ${data.fullName}
 Age: ${data.age || 'N/A'}
 Gender: ${data.gender || 'N/A'}
@@ -249,16 +249,18 @@ Additional Message: ${data.additionalMessage || 'No additional notes'}`;
       <section className="py-16 bg-green-100">
         <div className="max-w-5xl mx-auto text-center px-6">
           <h3 className="text-3xl font-bold text-green-800 mb-6">Visit Our Clinic</h3>
-          <p className="text-gray-700 mb-4">
-            Saanvi Healthcare Centre<br/>
-            [Add your full address here, e.g., "Near City Hospital, Main Road, Indore, Madhya Pradesh, India"]
-          </p>
+          <div className="flex items-center justify-center mb-4">
+            <img src="/assets/images/logo.svg" alt="Saanvi Healthcare Centre Logo" className="h-12 mr-4" />
+            <p className="text-gray-700">
+              No.6 Saraswati Sadan CHS, Sec: 23, Plot- 211, Juinagar, Navi Mumbai
+            </p>
+          </div>
 
           {/* Replace with your actual Google Map embed */}
           <div className="w-full h-96 rounded-xl overflow-hidden shadow-lg">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.7364564546727!2d75.8648458747445!3d23.802446290235376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39636e0d982eefff%3A0xb8c537a7bb5b3d53!2sSaanvi%20Healthcare%20Centre!5e0!3m2!1sen!2sin!4v1729856400000!5m2!1sen!2sin"
-              width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"
+              width="100%" height="100%" style={{ border: 0 }} allowFullScreen={true} loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>

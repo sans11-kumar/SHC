@@ -19,8 +19,8 @@ const Navbar = () => {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-primary-600">
-              Holistic Healthcare
+            <Link to="/" className="flex items-center">
+              <img src="/assets/images/shc_logo_exact.svg" alt="Holistic Healthcare Logo" className="h-10 w-auto" />
             </Link>
           </div>
 

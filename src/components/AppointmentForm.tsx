@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
+eimport { z } from 'zod';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from './ui/Button';
@@ -58,10 +58,12 @@ const appointmentSchema = z.object({
     .string()
     .max(500, 'Message must be less than 500 characters')
     .optional()
-    .transform(str => str === '' ? undefined : str),
+    .transform(str => (str === '' ? undefined : str)), // Ensure empty string is transformed to undefined
 });
 
-type AppointmentFormData = z.infer<typeof appointmentSchema>;
+type AppointmentFormData = z.infer<typeof appointmentSchema> & {
+  message?: string; // Explicitly make message optional for React Hook Form
+};
 
 const AppointmentForm = () => {
   const {
@@ -71,6 +73,16 @@ const AppointmentForm = () => {
     reset,
   } = useForm<AppointmentFormData>({
     resolver: zodResolver(appointmentSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      date: '',
+      time: '',
+      service: '',
+      doctor: '',
+      message: undefined, // Explicitly set as undefined for optional field
+    },
   });
 
   const services = [
@@ -94,11 +106,16 @@ const AppointmentForm = () => {
     { value: '16:00', label: '04:00 PM' },
   ];
 
-  const onSubmit = async (data: AppointmentFormData) => {
+  const onSubmit: SubmitHandler<AppointmentFormData> = async (data) => {
     try {
+      // Manually set message to undefined if it's an empty string before API call
+      const submissionData = {
+        ...data,
+        message: data.message === '' ? undefined : data.message,
+      };
       // Add your API call here
       await new Promise(resolve => setTimeout(resolve, 1500)); // Simulated API call
-      console.log('Form submitted:', data);
+      console.log('Form submitted:', submissionData);
       reset();
       // Show success message
     } catch (error) {
@@ -227,194 +244,3 @@ const AppointmentForm = () => {
     </motion.div>
   );
 };
-
-export default AppointmentForm;
-    name: '',
-    email: '',
-    phone: '',
-    date: '',
-    time: '',
-    service: '',
-    doctor: '',
-    message: ''
-  });
-
-  const services = [
-    'General Medicine',
-    'Ayurveda Consultation',
-    'Health Check-up',
-    'Wellness Program'
-  ];
-
-  const doctors = [
-    'Dr. Smith - General Medicine',
-    'Dr. Patel - Ayurveda Specialist'
-  ];
-
-  const timeSlots = [
-    '09:00 AM', '10:00 AM', '11:00 AM',
-    '02:00 PM', '03:00 PM', '04:00 PM'
-  ];
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      // Add your form submission logic here
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulated API call
-      setSuccess(true);
-      // Reset form or redirect
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  if (success) {
-    return (
-      <div className="text-center py-12">
-        <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Appointment Scheduled!</h2>
-        <p className="text-gray-600 mb-6">We'll send you a confirmation email with all the details.</p>
-        <Button 
-          variant="outline"
-          onClick={() => setSuccess(false)}
-        >
-          Schedule Another
-        </Button>
-      </div>
-    );
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Input
-        label="Full Name"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
-      <Input
-        label="Email"
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
-      <Input
-        label="Phone"
-        type="tel"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-        required
-      />
-      <Input
-        label="Preferred Date"
-        type="date"
-        name="date"
-        value={formData.date}
-        onChange={handleChange}
-        min={new Date().toISOString().split('T')[0]}
-        required
-      />
-      
-      <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Preferred Time
-          <span className="text-red-500 ml-1">*</span>
-        </label>
-        <select
-          name="time"
-          value={formData.time}
-          onChange={handleChange}
-          required
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-        >
-          <option value="">Select Time</option>
-          {timeSlots.map(slot => (
-            <option key={slot} value={slot}>{slot}</option>
-          ))}
-        </select>
-      </div>
-
-      <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Service
-          <span className="text-red-500 ml-1">*</span>
-        </label>
-        <select
-          name="service"
-          value={formData.service}
-          onChange={handleChange}
-          required
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-        >
-          <option value="">Select Service</option>
-          {services.map(service => (
-            <option key={service} value={service}>{service}</option>
-          ))}
-        </select>
-      </div>
-
-      <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Preferred Doctor
-          <span className="text-red-500 ml-1">*</span>
-        </label>
-        <select
-          name="doctor"
-          value={formData.doctor}
-          onChange={handleChange}
-          required
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-        >
-          <option value="">Select Doctor</option>
-          {doctors.map(doctor => (
-            <option key={doctor} value={doctor}>{doctor}</option>
-          ))}
-        </select>
-      </div>
-
-      <div className="col-span-full">
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Additional Notes
-        </label>
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          rows={4}
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-          placeholder="Any specific concerns or requirements..."
-        ></textarea>
-      </div>
-
-      <div className="col-span-full">
-        <Button
-          type="submit"
-          loading={loading}
-          fullWidth
-          size="lg"
-        >
-          Schedule Appointment
-        </Button>
-      </div>
-    </form>
-  );
-};
-
-export default AppointmentForm;
