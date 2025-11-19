@@ -21,7 +21,8 @@ const services = {
     { icon: '🦴', title: 'Joint & Bone Disorders (Arthritis, Osteoporosis)', description: 'Pain management, physiotherapy integration.' },
     { icon: '🩺', title: 'General Health Check-ups', description: 'Preventive health screenings, vaccinations, medical reviews.' },
     { icon: '💉', title: 'Post-COVID Recovery & Fatigue', description: 'Immunity restoration, lung function support, energy tonics.' },
-    { icon: '💊', title: 'Chronic Disease Management', description: 'Long-term care with integrated follow-up and medical supervision.' }
+    { icon: '💊', title: 'Chronic Disease Management', description: 'Long-term care with integrated follow-up and medical supervision.' },
+    { icon: '👵', title: 'Geriatric Care', description: 'Specialized care for elderly patients, focusing on age-related health issues.' }
   ],
   drSunitha: [
     { icon: '🌿', title: 'Detoxification Therapy', description: 'Complete body cleansing and rejuvenation treatments.' },

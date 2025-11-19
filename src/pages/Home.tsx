@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ServiceCard from '../components/ServiceCard';
 import WhyChooseUs from '../components/WhyChooseUs';
 import EditableText from '../components/EditableText';
@@ -25,7 +26,7 @@ const Home: React.FC = () => {
             tag="p"
             className="text-lg text-gray-700 mb-6"
           />
-          <a href="appointment.html" className="inline-block bg-green-700 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-green-800 transition">Book Appointment</a>
+          <Link to="/appointment" className="inline-block bg-green-700 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-green-800 transition">Book Appointment</Link>
         </div>
       </section>
 
@@ -37,7 +38,6 @@ const Home: React.FC = () => {
           </div>
           <div className="md:w-1/2 md:pl-10 mt-8 md:mt-0">
             <div className="flex items-center mb-4">
-              <img src="/logo.svg" alt="Holistic Healthcare Logo" className="h-12 mr-4" />
               <EditableText
                 page="home"
                 section="about"
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
               className="text-gray-700 mb-6"
               multiline={true}
             />
-            <a href="about.html" className="bg-green-700 text-white px-6 py-2 rounded-full font-medium hover:bg-green-800 transition">Know More</a>
+            <Link to="/about" className="bg-green-700 text-white px-6 py-2 rounded-full font-medium hover:bg-green-800 transition">Know More</Link>
           </div>
         </div>
       </section>

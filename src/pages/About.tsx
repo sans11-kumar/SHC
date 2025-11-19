@@ -10,7 +10,7 @@ const doctors = [
     title: 'MBBS, MD General Medicine, CCDM (Diabetes)',
     specialty: 'General Medicine',
     experience: '15+ years',
-    image: '/images/doctors/doctor1.jpg', // Assuming doctor1.jpg is a male doctor
+    image: '/assets/dr-dhirendra-yadav.svg',
     description: 'Dhirendra Yadav is a highly experienced general physician with expertise in managing chronic diseases and preventive healthcare.',
     timings: '7:00 pm to 9:30 pm',
   },
@@ -19,7 +19,7 @@ const doctors = [
     title: 'BAMS, MD Ayurveda Medicine, PGD in Clinical Nutrition and Dietetics',
     specialty: 'Ayurveda',
     experience: '12+ years',
-    image: '/images/doctors/doctor2.jpg', // Assuming doctor2.jpg is a female doctor
+    image: '/assets/dr-sunitha-yadav.svg',
     description: 'Sunitha Yadav specializes in traditional Ayurvedic treatments and has helped numerous patients achieve holistic wellness.',
     timings: '10:00 am to 1:30 pm',
   },
@@ -38,14 +38,6 @@ const About = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex items-center justify-center mb-6">
-              <EditableImage
-                page="about"
-                section="hero"
-                field="logo"
-                defaultSrc="/assets/images/logo.svg"
-                alt="Saanvi Healthcare Logo"
-                className="h-16 mr-4"
-              />
               <EditableText
                 page="about"
                 section="hero"
