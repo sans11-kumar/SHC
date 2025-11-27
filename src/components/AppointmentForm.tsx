@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import Button from './ui/Button';
@@ -13,36 +14,91 @@ interface AppointmentFormData {
   time: string;
   service: string;
   doctor: string;
+  consultationType: 'in-clinic' | 'online';
   message?: string;
 }
+
+const doctorsData = [
+  { 
+    value: 'dr-dhirendra', 
+    label: 'Dr. Dhirendra Yadav (MD, Internal Medicine)',
+    timings: {
+      'in-clinic': [
+        { value: '19:00', label: '07:00 PM' },
+        { value: '19:30', label: '07:30 PM' },
+        { value: '20:00', label: '08:00 PM' },
+        { value: '20:30', label: '08:30 PM' },
+        { value: '21:00', label: '09:00 PM' },
+        { value: '21:30', label: '09:30 PM' },
+      ],
+      'online': [
+        { value: '18:00', label: '06:00 PM' },
+        { value: '18:30', label: '06:30 PM' },
+      ],
+    },
+  },
+  { 
+    value: 'dr-sunitha', 
+    label: 'Dr. Sunitha Yadav (MD, Ayurveda Medicine)',
+    timings: {
+      'in-clinic': [
+        { value: '10:00', label: '10:00 AM' },
+        { value: '10:30', label: '10:30 AM' },
+        { value: '11:00', label: '11:00 AM' },
+        { value: '11:30', label: '11:30 AM' },
+        { value: '12:00', label: '12:00 PM' },
+        { value: '12:30', label: '12:30 PM' },
+      ],
+      'online': [
+        { value: '13:00', label: '01:00 PM' },
+        { value: '13:30', label: '01:30 PM' },
+        { value: '18:00', label: '06:00 PM' },
+        { value: '18:30', label: '06:30 PM' },
+        { value: '19:00', label: '07:00 PM' },
+        { value: '19:30', label: '07:30 PM' },
+      ],
+    },
+  },
+  // Add more doctors if needed
+];
+
+const consultationTypes = [
+  { value: 'in-clinic', label: 'In-clinic Visit' },
+  { value: 'online', label: 'Online Consultation' },
+];
 
 const AppointmentForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<AppointmentFormData>();
+
+  const selectedDoctor = watch('doctor');
+  const selectedConsultationType = watch('consultationType');
+
+  const [availableTimeSlots, setAvailableTimeSlots] = useState<{ value: string; label: string }[]>([]);
+
+  useEffect(() => {
+    const doctor = doctorsData.find(d => d.value === selectedDoctor);
+    if (doctor && selectedConsultationType) {
+      setAvailableTimeSlots(doctor.timings[selectedConsultationType] || []);
+    } else {
+      setAvailableTimeSlots([]);
+    }
+    // Reset time when doctor or consultation type changes
+    setValue('time', '');
+  }, [selectedDoctor, selectedConsultationType, setValue]);
+
 
   const services = [
     { value: 'general-medicine', label: 'General Medicine' },
     { value: 'ayurveda', label: 'Ayurveda Consultation' },
     { value: 'health-checkup', label: 'Health Check-up' },
     { value: 'wellness', label: 'Wellness Program' },
-  ];
-
-  const doctors = [
-    { value: 'dr-smith', label: 'Dr. Smith - General Medicine' },
-    { value: 'dr-patel', label: 'Dr. Patel - Ayurveda Specialist' },
-  ];
-
-  const timeSlots = [
-    { value: '09:00', label: '09:00 AM' },
-    { value: '10:00', label: '10:00 AM' },
-    { value: '11:00', label: '11:00 AM' },
-    { value: '14:00', label: '02:00 PM' },
-    { value: '15:00', label: '03:00 PM' },
-    { value: '16:00', label: '04:00 PM' },
   ];
 
   const onSubmit = async (data: AppointmentFormData) => {
@@ -88,6 +144,22 @@ const AppointmentForm = () => {
           required
         />
 
+        <Select
+          label="Preferred Doctor"
+          options={doctorsData.map(doc => ({ value: doc.value, label: doc.label }))}
+          {...register('doctor', { required: 'Doctor is required' })}
+          error={errors.doctor?.message}
+          required
+        />
+
+        <Select
+          label="Consultation Type"
+          options={consultationTypes}
+          {...register('consultationType', { required: 'Consultation type is required' })}
+          error={errors.consultationType?.message}
+          required
+        />
+
         <Input
           label="Preferred Date"
           type="date"
@@ -99,26 +171,19 @@ const AppointmentForm = () => {
 
         <Select
           label="Preferred Time"
-          options={timeSlots}
+          options={availableTimeSlots}
           {...register('time', { required: 'Time is required' })}
           error={errors.time?.message}
           required
-        />
-
-        <Select
-          label="Service"
-          options={services}
-          {...register('service', { required: 'Service is required' })}
-          error={errors.service?.message}
-          required
+          disabled={!selectedDoctor || !selectedConsultationType || availableTimeSlots.length === 0}
         />
 
         <div className="col-span-full">
           <Select
-            label="Preferred Doctor"
-            options={doctors}
-            {...register('doctor', { required: 'Doctor is required' })}
-            error={errors.doctor?.message}
+            label="Service"
+            options={services}
+            {...register('service', { required: 'Service is required' })}
+            error={errors.service?.message}
             required
           />
         </div>

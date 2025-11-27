@@ -89,7 +89,7 @@ const Services = () => {
             page="services"
             section="dr-dhirendra"
             field="title"
-            defaultValue="🩺 Dr. Dhirendra (MBBS, MD)"
+            defaultValue="🩺 Dr. Dhirendra (MBBS, MD Medicine)"
             tag="h2"
             className="text-3xl font-bold text-green-800 text-center mb-4"
           />
@@ -151,7 +151,7 @@ const Services = () => {
             page="services"
             section="dr-sunitha"
             field="title"
-            defaultValue="🌿 Dr. Sunitha (MD Ayurveda)"
+            defaultValue="🌿 Dr. Sunitha (MD Ayurveda Kayachikitsa)"
             tag="h2"
             className="text-3xl font-bold text-green-800 text-center mb-4"
           />
@@ -159,7 +159,7 @@ const Services = () => {
             page="services"
             section="dr-sunitha"
             field="specialty"
-            defaultValue="Specialist in Ayurveda medicine and Chronic Disease Management"
+            defaultValue="Specialist in Ayurveda Kayachikitsa and Chronic Disease Management"
             tag="p"
             className="text-center text-gray-600 mb-10"
           />

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useContent } from '../contexts/ContentContext';
 import EditableImage from '../components/EditableImage';

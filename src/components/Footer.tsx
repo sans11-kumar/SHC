@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import EditableText from './EditableText';
 
 const Footer: React.FC = () => {
@@ -18,9 +17,17 @@ const Footer: React.FC = () => {
         page="footer"
         section="copyright"
         field="text"
-        defaultValue="© 2025 All Rights Reserved | Holistic Healing through Modern Medicine & Ayurveda"
+        defaultValue="© 2025 All Rights Reserved | SAANVI HEALTHCARE CENTRE"
         tag="p"
         className="text-sm mt-2"
+      />
+      <EditableText
+        page="footer"
+        section="tagline"
+        field="text"
+        defaultValue="Holistic Healing through Modern Medicine & Ayurveda"
+        tag="p"
+        className="text-xs text-green-200 mt-1"
       />
     </footer>
   );

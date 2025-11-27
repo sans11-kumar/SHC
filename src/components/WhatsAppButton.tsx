@@ -1,12 +1,12 @@
- import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const WhatsAppButton = () => {
+  const navigate = useNavigate();
   const whatsappNumber = '+918976871584'; // Replace with actual WhatsApp number
-  const callNumber = '+918976871584'; // Replace with actual call number
+  // Removed callNumber as it's no longer used for direct calls
 
   const handleCallClick = () => {
-    window.open(`tel:${callNumber}`);
+    navigate('/contact');
   };
 
   return (

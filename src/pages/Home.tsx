@@ -14,9 +14,17 @@ const Home: React.FC = () => {
             page="home"
             section="hero"
             field="title"
-            defaultValue="Holistic Healing through Modern Medicine & Ayurveda"
+            defaultValue="SAANVI HEALTHCARE CENTRE"
             tag="h2"
             className="text-4xl md:text-5xl font-bold text-green-800 mb-4"
+          />
+          <EditableText
+            page="home"
+            section="hero"
+            field="tagline"
+            defaultValue="Holistic Healing through Modern Medicine & Ayurveda"
+            tag="p"
+            className="text-lg text-gray-700 mb-2"
           />
           <EditableText
             page="home"
