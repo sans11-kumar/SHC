@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/', // Explicitly set base path to root
+  // Use a relative base so built files load correctly when opening
+  // `dist/index.html` directly or hosting on a subpath-less static server.
+  base: './',
   plugins: [react()],
   server: {
     host: true,
