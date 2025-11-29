@@ -5,7 +5,7 @@ import GoogleMap from '../components/GoogleMap';
 const contactInfo = {
   address: "No.6 Saraswati Sadan CHS, Sec: 23, Plot- 211, Juinagar, Navi Mumbai",
   phone: "+91 89768 71584",
-  email: "contact@saanvihealthcare.com",
+  email: "saanvihealthcarecentre@gmail.com",
   timings: "Monday–Saturday: 10:00 AM – 9:00 PM",
   whatsapp: "+918976871584"
 };
@@ -48,7 +48,7 @@ const Contact = () => {
               <span role="img" aria-label="phone">📞</span> Phone: <EditableText page="contact" section="info" field="phone" defaultValue={contactInfo.phone} tag="span" className="inline" />
             </p>
             <p className="mb-4 text-lg text-gray-800">
-              <span role="img" aria-label="email">✉️</span> Email: <EditableText page="contact" section="info" field="email" defaultValue={contactInfo.email} tag="span" className="inline" />
+              <span role="img" aria-label="email">✉️</span> Email: <a href="mailto:saanvihealthcarecentre@gmail.com" className="text-blue-600 hover:underline"><EditableText page="contact" section="info" field="email" defaultValue={contactInfo.email} tag="span" className="inline" /></a>
             </p>
             <p className="mb-4 text-lg text-gray-800">
               <span role="img" aria-label="time">⏰</span> Timings: <EditableText page="contact" section="info" field="timings" defaultValue={contactInfo.timings} tag="span" className="inline" />

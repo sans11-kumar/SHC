@@ -7,6 +7,8 @@ import { Helmet } from 'react-helmet-async';
 import { doctors } from './About';
 import { getDoctorTimings, generateTimeSlots } from '../utils/appointmentUtils';
 import Select from '../components/ui/Select';
+import TimePicker from '../components/ui/TimePicker';
+import SuccessMessage from '../components/ui/SuccessMessage';
 
 // Form validation schema
 const appointmentSchema = z.object({
@@ -35,11 +37,13 @@ const Appointment = () => {
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<AppointmentFormData>({
     resolver: zodResolver(appointmentSchema),
   });
 
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const preferredDoctor = watch('preferredDoctor');
   const [timeSlots, setTimeSlots] = useState<{ value: string; label: string }[]>([]);
   const consultationType = watch('consultationType'); // Watch for changes in consultation type
@@ -50,15 +54,18 @@ const Appointment = () => {
       if (timings) {
         const slots = generateTimeSlots(timings);
         setTimeSlots(slots);
+        console.log('Generated time slots:', slots); // Debugging line
       } else {
         setTimeSlots([]);
+        console.log('No timings found for selected doctor/consultation type.'); // Debugging line
       }
       setValue('preferredTime', ''); // Reset preferred time when doctor or consultation type changes
     } else {
       setTimeSlots([]);
       setValue('preferredTime', '');
+      console.log('Preferred Doctor or Consultation Type not selected.'); // Debugging line
     }
-  }, [preferredDoctor, consultationType, setValue]);
+}, [preferredDoctor, consultationType, setValue]);
 
   const onSubmit = async (data: AppointmentFormData) => {
     // Format the message for WhatsApp
@@ -76,6 +83,9 @@ Additional Message: ${data.additionalMessage || 'No additional notes'}`;
 
     const encodedText = encodeURIComponent(text);
     window.open(`https://wa.me/91XXXXXXXXXX?text=${encodedText}`, '_blank');
+
+    setShowSuccessMessage(true);
+    reset(); // Reset form fields after submission
   };
 
   const doctorOptions = doctors.map(doctor => ({
@@ -85,6 +95,14 @@ Additional Message: ${data.additionalMessage || 'No additional notes'}`;
 
   return (
     <>
+      {showSuccessMessage && (
+        <SuccessMessage
+          title="Appointment Request Submitted!"
+          message="Your appointment request has been successfully sent. We will get back to you shortly."
+          onClose={() => setShowSuccessMessage(false)}
+        />
+      )}
+
       <Helmet>
         <title>Book Appointment | Saanvi Healthcare Centre</title>
         <meta 
@@ -226,11 +244,13 @@ Additional Message: ${data.additionalMessage || 'No additional notes'}`;
                   <p className="mt-1 text-red-600 text-sm">{errors.preferredDate.message}</p>
                 )}
               </div>
-              <Select
+              <TimePicker
                 label="Preferred Time"
-                options={timeSlots}
-                {...register('preferredTime')}
+                value={watch('preferredTime')}
+                onChange={(time) => setValue('preferredTime', time)}
+                timeSlots={timeSlots}
                 error={errors.preferredTime?.message}
+                required={true}
                 disabled={!preferredDoctor || !consultationType}
                 helpText={!preferredDoctor ? 'Please select a doctor to see available time slots.' : !consultationType ? 'Please select a consultation type to see available time slots.' : ''}
               />

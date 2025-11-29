@@ -11,7 +11,8 @@ export interface Doctor {
   videoTimings: string;    // e.g., '6:00 pm to 7:00 pm'
 }
 
-export const getDoctorTimings = (doctorName: string, consultationType: string): string | undefined => {
+export const getDoctorTimings = (doctorName: string | undefined, consultationType: string): string | undefined => {
+  if (!doctorName) return undefined; // Handle undefined doctorName
   const doctor = doctors.find(d => d.name === doctorName.split(' - ')[0]);
   if (!doctor) return undefined;
 
@@ -23,7 +24,7 @@ export const getDoctorTimings = (doctorName: string, consultationType: string): 
   return undefined;
 };
 
-export const generateTimeSlots = (timings: string, intervalMinutes: number = 30): { value: string; label: string }[] => {
+export const generateTimeSlots = (timings: string, intervalMinutes: number = 30): { value: string; label: string; available: boolean }[] => {
   if (!timings) return [];
 
   const [startTimeStr, endTimeStr] = timings.split(' to ');
@@ -46,7 +47,7 @@ export const generateTimeSlots = (timings: string, intervalMinutes: number = 30)
 
   if (!startTime || !endTime) return [];
 
-  const slots: { value: string; label: string }[] = [];
+  const slots: { value: string; label: string; available: boolean }[] = [];
   let currentTime = startTime;
 
   while (currentTime.getTime() <= endTime.getTime()) {
@@ -57,7 +58,7 @@ export const generateTimeSlots = (timings: string, intervalMinutes: number = 30)
     const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
 
     const slot = `${formattedHours}:${formattedMinutes} ${ampm}`;
-    slots.push({ value: slot, label: slot });
+    slots.push({ value: slot, label: slot, available: true });
 
     currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
   }

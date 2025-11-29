@@ -19,7 +19,7 @@ const SuccessMessage = ({ title, message, onClose }: SuccessMessageProps) => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", damping: 20 }}
-        className="bg-white rounded-2xl p-6 max-w-md w-full"
+        className="bg-white rounded-2xl p-6 max-w-md w-full shadow-lg border border-gray-200"
       >
         <div className="text-center">
           <motion.div
@@ -71,7 +71,7 @@ const SuccessMessage = ({ title, message, onClose }: SuccessMessageProps) => {
           >
             <button
               onClick={onClose}
-              className="px-6 py-3 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 transition-colors duration-200"
+              className="px-6 py-3 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 transition-colors duration-300 transform hover:scale-105"
             >
               Continue
             </button>

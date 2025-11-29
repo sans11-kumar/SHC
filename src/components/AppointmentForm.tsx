@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Button from './ui/Button';
 import Input from './ui/Input';
 import Select from './ui/Select';
+import TimePicker from './ui/TimePicker';
 import Textarea from './ui/Textarea';
 
 interface AppointmentFormData {
@@ -64,10 +65,9 @@ const doctorsData: DoctorData[] = [
         { value: '11:30', label: '11:30 AM' },
         { value: '12:00', label: '12:00 PM' },
         { value: '12:30', label: '12:30 PM' },
+        { value: '13:00', label: '01:00 PM' },
       ],
       'online': [
-        { value: '13:00', label: '01:00 PM' },
-        { value: '13:30', label: '01:30 PM' },
         { value: '18:00', label: '06:00 PM' },
         { value: '18:30', label: '06:30 PM' },
         { value: '19:00', label: '07:00 PM' },
@@ -195,14 +195,15 @@ const AppointmentForm = () => {
           required
         />
 
-        <Select
+        <TimePicker
           label="Preferred Time"
-          options={availableTimeSlots}
-          {...register('time', { required: 'Time is required' })}
+          timeSlots={availableTimeSlots}
+          value={watch('time')}
+          onChange={(time) => setValue('time', time, { shouldValidate: true })}
           error={errors.time?.message}
           required
-          disabled={!selectedDoctor || !selectedConsultationType || availableTimeSlots.length === 0}
         />
+        <input type="hidden" {...register('time', { required: 'Time is required' })} />
 
         <div className="col-span-full">
           <Select
